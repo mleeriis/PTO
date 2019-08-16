@@ -58,8 +58,10 @@ public class JDBCTests {
     public void updateStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.createUpdateDeletePTO(con, "UPDATE Requests SET Status = 1 WHERE ID = 3"));
-    }
+        String goodStatement = "UPDATE Requests SET Status = 1 WHERE ID = 3";
+        String badStatement = "UPDATE Requests SET Status = 1 WHERE ID = 0";
+        assertEquals(1, testConnection.createUpdateDeletePTO(con, goodStatement));
+     }
 
     @Test
     public void deleteStatementTest() throws SQLException {

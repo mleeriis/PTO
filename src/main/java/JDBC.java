@@ -71,6 +71,7 @@ public class JDBC {
 
         } catch (SQLException e) {
             //e.printStackTrace();
+            System.out.println("Invalid SQL Statement");
             System.out.println(e.getMessage());
         } finally {
             if (stmt != null) {
