@@ -10,7 +10,7 @@ public class JDBC {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
 
-        if (con != null){
+        if (con != null) {
 
             System.out.println("success");
         } else {
@@ -106,22 +106,29 @@ public class JDBC {
         LEFT JOIN Employees AS E ON E.Id = R.EmployeeID
         WHERE R.EmployeeID = 1;
         */
-        List allRequestsForEmployee = new ArrayList<Array>();
+
+        List allRequestsForEmployee = new ArrayList<String[]>();
+        Statement stmt = null;
         String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
-        try (Statement stmt = con.createStatement()) {
+        try {
+            stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            String startDate, endDate;
-            String status;
+            // String startDate, endDate, status;
+            String[] entry = new String[3];
 
             while (rs.next()) {
-                startDate = rs.getDate("StartDate").toString();
-                endDate = rs.getDate("EndDate").toString();
-                status = rs.getString("Status");
+                entry[0] = rs.getDate("StartDate").toString();
+                entry[1] = rs.getDate("EndDate").toString();
+                entry[2] = rs.getString("Status");
 
-                System.out.println(String.format("Start Date: %s, End Date: %s, Status %s", startDate, endDate, status));
+                allRequestsForEmployee.add(entry);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
         }
 
     }
