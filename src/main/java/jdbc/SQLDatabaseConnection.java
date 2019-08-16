@@ -7,20 +7,17 @@ import java.sql.SQLException;
 
 public class SQLDatabaseConnection {
 
-    public static void main() {
-        String connectionUrl =
-                "jdbc:sqlserver://localhost;"
-                        + "database=PaidTimeOff;"
-                        + "user=a;"
-                        + "password=reallyStrongPwd123;";
+    private static String connectionURL;
 
-        try (Connection connection = DriverManager.getConnection(connectionUrl)) {
-            System.out.println("Connected");
-        }
-        // Handle any errors that may have occurred.
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public SQLDatabaseConnection(){
+        this.connectionURL = "jdbc:sqlserver://localhost;"
+                + "database=PaidTimeOff;"
+                + "user=sa;"
+                + "password=reallyStrongPwd123;";
+    }
+
+    public static String getConnectionURL() {
+        return connectionURL;
     }
 
 }

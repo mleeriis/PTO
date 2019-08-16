@@ -11,13 +11,14 @@ public class Main {
     }
 
     public static boolean connection() {
+        SQLDatabaseConnection dbConnection = new SQLDatabaseConnection();
 
-        try {
-            SQLDatabaseConnection.main();
+        try (Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL())) {
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
