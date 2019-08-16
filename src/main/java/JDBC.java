@@ -21,11 +21,11 @@ public class JDBC {
         return null;
     }
 
-    public ResultSet selectStatement(Connection con) throws SQLException {
+    public ResultSet selectStatement(Connection con, String table) throws SQLException {
 
 
             Statement stmt = null;
-            String query = "SELECT * FROM employees";
+            String query = "SELECT * FROM " + table + ";";
             try {
                 stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);

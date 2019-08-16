@@ -1,9 +1,9 @@
 import org.junit.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class JDBCTests {
     @Test
@@ -15,7 +15,9 @@ public class JDBCTests {
     @Test
     public void selectStatementSuccessful() throws SQLException {
         JDBC testConnection = new JDBC();
-        assertNotNull(testConnection.selectStatement(testConnection.connection()));
+        Connection con = testConnection.connection();
+        assertNotNull(testConnection.selectStatement(con, "employees"));
+        assertNull(testConnection.selectStatement(con, "emp"));
     }
 
 
