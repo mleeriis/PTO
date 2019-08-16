@@ -1,13 +1,11 @@
 import jdbc.SQLDatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class JDBC {
 
     public static void main(String[] args) {
+
 
     }
 
@@ -17,15 +15,31 @@ public class JDBC {
         try {
             Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL());
             return connection;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public void selectStatement(){
+    public ResultSet selectStatement(Connection con) throws SQLException {
 
 
+            Statement stmt = null;
+            String query = "SELECT * FROM employees";
+            try {
+                stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+
+                return rs;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+            return null;
     }
+
 }
