@@ -61,7 +61,7 @@ public class JDBC {
         return null;
     }
 
-    public int insertOrUpdateStatement(Connection con, String preparedStatement) throws SQLException {
+    public int createUpdateDeletePTO(Connection con, String preparedStatement) throws SQLException {
         //INSERT INTO Requests VALUES (ID, empID, start, end, 2*)
         // *2 = StatusID = Pending
 

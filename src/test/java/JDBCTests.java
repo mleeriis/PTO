@@ -47,13 +47,13 @@ public class JDBCTests {
     public void insertStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.insertOrUpdateStatement(con, "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);"));
+        assertEquals(1, testConnection.createUpdateDeletePTO(con, "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);"));
     }
 
     @Test
     public void updateStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.insertOrUpdateStatement(con, "UPDATE Requests SET Status = 3 WHERE ID = 1"));
+        assertEquals(1, testConnection.createUpdateDeletePTO(con, "UPDATE Requests SET Status = 3 WHERE ID = 1"));
     }
 }
