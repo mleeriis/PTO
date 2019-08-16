@@ -70,9 +70,9 @@ public class JDBC {
             result = stmt.executeUpdate(query);
 
         } catch (SQLException e) {
-            //e.printStackTrace();
             System.out.println("Invalid SQL Statement");
             System.out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             if (stmt != null) {
                 stmt.close();

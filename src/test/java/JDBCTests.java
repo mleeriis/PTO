@@ -51,7 +51,7 @@ public class JDBCTests {
         String goodStatement = "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);";
         String invalidStatement = "INSERT INTO Requets VALUES (2, 2020-08-17, 2020-08-18, 2);";
         assertEquals(1, testConnection.createUpdateDeletePTO(con, goodStatement));
-        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, invalidStatement));
+        assertEquals(-1, testConnection.createUpdateDeletePTO(con, invalidStatement));
     }
 
     @Test
