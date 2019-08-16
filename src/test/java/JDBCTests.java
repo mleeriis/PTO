@@ -70,6 +70,12 @@ public class JDBCTests {
     public void deleteStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.createUpdateDeletePTO(con, "DELETE FROM Requests WHERE ID=2"));
+        String goodStatement = "DELETE FROM Requests WHERE ID=2";
+        String validButUselessStatement = "DELETE FROM Requests WHERE ID=0";
+        String badStatement = "DELETE FROM Requess WHERE ID=2";
+        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, goodStatement));
+        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, validButUselessStatement));
+        assertEquals(-1, testConnection.createUpdateDeletePTO(con, badStatement));
+
     }
 }
