@@ -70,7 +70,8 @@ public class JDBC {
             result = stmt.executeUpdate(query);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             if (stmt != null) {
                 stmt.close();

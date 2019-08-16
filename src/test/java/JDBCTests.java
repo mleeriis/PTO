@@ -48,7 +48,10 @@ public class JDBCTests {
     public void insertStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.createUpdateDeletePTO(con, "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);"));
+        String goodStatement = "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);";
+        String badStatement = "INSERT INTO Requets VALUES (2, 2020-08-17, 2020-08-18, 2);";
+        assertEquals(1, testConnection.createUpdateDeletePTO(con, goodStatement));
+        assertNotEquals(1, testConnection.createUpdateDeletePTO(con, badStatement));
     }
 
     @Test
