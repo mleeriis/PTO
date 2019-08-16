@@ -21,6 +21,7 @@ public class JDBCTests {
         assertNull(testConnection.selectStatement(con, "emp"));
     }
 
+    @Ignore
     @Test
     public void processResultSetTest() throws SQLException {
         JDBC testConnection = new JDBC();
@@ -30,7 +31,23 @@ public class JDBCTests {
         testConnection.processResultSet(rs);
 
     }
+    @Ignore
+    @Test
+    public void getEmployeeDataTest(){
+        JDBC testConnection = new JDBC();
 
+        try {
+            testConnection.getEmployeeData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+    public void insertStatementTest() throws SQLException {
+        JDBC testConnection = new JDBC();
+        Connection con = testConnection.connection();
+        assertEquals(1, testConnection.insertStatement(con));
+    }
 
 }
