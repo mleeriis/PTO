@@ -57,4 +57,13 @@ public class JDBCTests {
         assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, validButUselessStatement));
         assertEquals(-1, testConnection.createUpdateDeletePTO(con, badStatement));
     }
+
+    @Test
+    public void getRequestsTest(){
+        try {
+            testConnection.getRequestData(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
