@@ -11,13 +11,14 @@ public class JDBC {
     public Connection connection() {
         SQLDatabaseConnection dbConnection = new SQLDatabaseConnection();
 
+        Connection connection = null;
+
         try {
-            Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL());
-            return connection;
+            connection = DriverManager.getConnection(dbConnection.getConnectionURL());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return connection;
     }
 
     public ResultSet selectStatement(Connection con, String table) throws SQLException {
