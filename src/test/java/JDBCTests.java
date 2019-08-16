@@ -49,9 +49,9 @@ public class JDBCTests {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
         String goodStatement = "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);";
-        String badStatement = "INSERT INTO Requets VALUES (2, 2020-08-17, 2020-08-18, 2);";
+        String invalidStatement = "INSERT INTO Requets VALUES (2, 2020-08-17, 2020-08-18, 2);";
         assertEquals(1, testConnection.createUpdateDeletePTO(con, goodStatement));
-        assertNotEquals(1, testConnection.createUpdateDeletePTO(con, badStatement));
+        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, invalidStatement));
     }
 
     @Test
@@ -59,9 +59,12 @@ public class JDBCTests {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
         String goodStatement = "UPDATE Requests SET Status = 1 WHERE ID = 3";
-        String badStatement = "UPDATE Requests SET Status = 1 WHERE ID = 0";
-        assertEquals(1, testConnection.createUpdateDeletePTO(con, goodStatement));
-     }
+        String validButUselessStatement = "UPDATE Requests SET Status = 1 WHERE ID = 0";
+        String invalidStatement = "UPDATE Requess SET Status = 1 WHERE ID = 0";
+        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, goodStatement));
+        assertNotEquals(-1, testConnection.createUpdateDeletePTO(con, validButUselessStatement));
+        assertEquals(-1, testConnection.createUpdateDeletePTO(con, invalidStatement));
+    }
 
     @Test
     public void deleteStatementTest() throws SQLException {
