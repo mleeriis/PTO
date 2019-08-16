@@ -31,9 +31,10 @@ public class JDBCTests {
         testConnection.processResultSet(rs);
 
     }
+
     @Ignore
     @Test
-    public void getEmployeeDataTest(){
+    public void getEmployeeDataTest() {
         JDBC testConnection = new JDBC();
 
         try {
@@ -54,7 +55,7 @@ public class JDBCTests {
     public void updateStatementTest() throws SQLException {
         JDBC testConnection = new JDBC();
         Connection con = testConnection.connection();
-        assertEquals(1, testConnection.createUpdateDeletePTO(con, "UPDATE Requests SET Status = 3 WHERE ID = 3"));
+        assertEquals(1, testConnection.createUpdateDeletePTO(con, "UPDATE Requests SET Status = 1 WHERE ID = 3"));
     }
 
     @Test

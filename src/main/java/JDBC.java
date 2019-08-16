@@ -62,17 +62,12 @@ public class JDBC {
     }
 
     public int createUpdateDeletePTO(Connection con, String preparedStatement) throws SQLException {
-        //INSERT INTO Requests VALUES (ID, empID, start, end, 2*)
-        // *2 = StatusID = Pending
-
-        // UPDATE table SET col=val WHERE condition
-
+        int result = -1;
         Statement stmt = null;
         String query = preparedStatement;
         try {
             stmt = con.createStatement();
-            int result = stmt.executeUpdate(query);
-            return result;
+            result = stmt.executeUpdate(query);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,7 +76,7 @@ public class JDBC {
                 stmt.close();
             }
         }
-        return -1;
+        return result;
     }
 
     public void processResultSet(ResultSet rs) throws SQLException {
