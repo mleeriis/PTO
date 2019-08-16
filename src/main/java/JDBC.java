@@ -11,19 +11,21 @@ public class JDBC {
 
     }
 
-    public boolean connection() {
+    public Connection connection() {
         SQLDatabaseConnection dbConnection = new SQLDatabaseConnection();
 
-        try (Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL())) {
-            return true;
+        try {
+            Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL());
+            return connection;
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
-    public static void selectStatement(){
+    public void selectStatement(){
+
 
     }
 }
