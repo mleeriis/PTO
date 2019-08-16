@@ -6,20 +6,6 @@ public class JDBC {
 
     public static void main(String[] args) {
 
-
-    }
-
-    public void getEmployeeData() throws SQLException {
-        try {
-            Connection con = connection();
-            ResultSet employeeData = selectStatement(con, "employees");
-
-            while (employeeData.next()) {
-                System.out.println(employeeData.getString("Firstname"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public Connection connection() {
@@ -36,7 +22,6 @@ public class JDBC {
 
     public ResultSet selectStatement(Connection con, String table) throws SQLException {
 
-
         Statement stmt = null;
         String query = "SELECT * FROM " + table + ";";
         try {
@@ -44,7 +29,6 @@ public class JDBC {
             ResultSet rs = stmt.executeQuery(query);
 
             return rs;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,4 +72,16 @@ public class JDBC {
         rs.close();
     }
 
+    public void getEmployeeData() throws SQLException {
+        try {
+            Connection con = connection();
+            ResultSet employeeData = selectStatement(con, "employees");
+
+            while (employeeData.next()) {
+                System.out.println(employeeData.getString("Firstname"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
