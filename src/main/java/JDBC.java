@@ -61,32 +61,14 @@ public class JDBC {
         return null;
     }
 
-    public int insertStatement(Connection con) throws SQLException {
+    public int insertOrUpdateStatement(Connection con, String preparedStatement) throws SQLException {
         //INSERT INTO Requests VALUES (ID, empID, start, end, 2*)
         // *2 = StatusID = Pending
 
-        Statement stmt = null;
-        String query = "INSERT INTO Requests VALUES (2, 2020-08-17, 2020-08-18, 2);";
-        try {
-            stmt = con.createStatement();
-            int result = stmt.executeUpdate(query);
-            return result;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        return -1;
-    }
-
-    public int updateStatement(Connection con) throws SQLException {
         // UPDATE table SET col=val WHERE condition
 
         Statement stmt = null;
-        String query = "UPDATE Requests SET Status = 1 WHERE ID = 1";
+        String query = preparedStatement;
         try {
             stmt = con.createStatement();
             int result = stmt.executeUpdate(query);
