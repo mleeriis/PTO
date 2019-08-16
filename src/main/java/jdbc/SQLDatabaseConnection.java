@@ -9,7 +9,7 @@ public class SQLDatabaseConnection {
 
     private static String connectionURL;
 
-    public SQLDatabaseConnection(){
+    public SQLDatabaseConnection() {
         this.connectionURL = "jdbc:sqlserver://localhost;"
                 + "database=PaidTimeOff;"
                 + "user=sa;"

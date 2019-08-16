@@ -3,14 +3,15 @@ import jdbc.SQLDatabaseConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class Main {
+public class JDBC {
 
     public static void main(String[] args) {
 
     }
 
-    public static boolean connection() {
+    public boolean connection() {
         SQLDatabaseConnection dbConnection = new SQLDatabaseConnection();
 
         try (Connection connection = DriverManager.getConnection(dbConnection.getConnectionURL())) {
@@ -20,5 +21,9 @@ public class Main {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void selectStatement(){
+
     }
 }
