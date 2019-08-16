@@ -1,6 +1,7 @@
 import org.junit.*;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
@@ -18,6 +19,16 @@ public class JDBCTests {
         Connection con = testConnection.connection();
         assertNotNull(testConnection.selectStatement(con, "employees"));
         assertNull(testConnection.selectStatement(con, "emp"));
+    }
+
+    @Test
+    public void processResultSetTest() throws SQLException {
+        JDBC testConnection = new JDBC();
+        Connection con = testConnection.connection();
+        ResultSet rs = testConnection.selectStatement(con, "employees");
+
+        testConnection.processResultSet(rs);
+
     }
 
 

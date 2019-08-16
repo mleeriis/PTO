@@ -34,12 +34,25 @@ public class JDBC {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
+            }
+            /*
+            finally {
+
                 if (stmt != null) {
                     stmt.close();
                 }
+
             }
+
+             */
             return null;
+    }
+
+    public void processResultSet(ResultSet rs) throws SQLException {
+        while (rs.next()){
+            System.out.println(rs.getString("Firstname"));
+        }
+        rs.close();
     }
 
 }
