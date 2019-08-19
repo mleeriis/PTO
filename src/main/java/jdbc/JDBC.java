@@ -98,7 +98,7 @@ public class JDBC {
         }
     }
 
-    public void getRequestData(Connection con) throws SQLException {
+    public List getRequestData(Connection con) throws SQLException {
         /*
         HR View Query =
         SELECT CONCAT(E.Firstname, ' ', E.Lastname) AS EmployeeName, R.StartDate, R.EndDate, S.Status FROM Requests AS R
@@ -130,6 +130,6 @@ public class JDBC {
                 stmt.close();
             }
         }
-
+        return allRequestsForEmployee;
     }
 }

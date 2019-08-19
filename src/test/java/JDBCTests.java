@@ -59,11 +59,7 @@ public class JDBCTests {
     }
 
     @Test
-    public void getRequestsTest(){
-        try {
-            testConnection.getRequestData(con);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void getRequestsTest() throws SQLException {
+        assertFalse(testConnection.getRequestData(con).isEmpty());
     }
 }
