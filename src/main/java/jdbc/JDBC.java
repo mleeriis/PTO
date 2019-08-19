@@ -1,4 +1,4 @@
-import jdbc.SQLDatabaseConnection;
+package jdbc;
 
 import java.sql.*;
 import java.util.ArrayList;

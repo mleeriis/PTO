@@ -1,7 +1,7 @@
+import jdbc.JDBC;
 import org.junit.*;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
