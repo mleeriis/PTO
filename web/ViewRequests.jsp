@@ -8,8 +8,6 @@
 
 <%
     List<String[]> allRequests = new ArrayList<String[]>();
-    String[] entry = {"asfd", "basdf", "casdf"};
-
 
     JDBC newConnection = new JDBC();
     Connection con = newConnection.connection();
