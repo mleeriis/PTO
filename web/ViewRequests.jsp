@@ -37,8 +37,8 @@
         </td>
         <td><%=allRequests.get(i)[1]%>
         </td>
-        <tr><%=allRequests.get(i)[2]%>
-        </tr>
+        <td><%=allRequests.get(i)[2]%>
+        </td>
     </tr>
     <%}%>
 
