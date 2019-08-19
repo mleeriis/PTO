@@ -107,7 +107,7 @@ public class JDBC {
         WHERE R.EmployeeID = 1;
         */
 
-        List allRequestsForEmployee = new ArrayList<String[]>();
+        List<String[]> allRequestsForEmployee = new ArrayList<String[]>();
         Statement stmt = null;
         String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
         try {
