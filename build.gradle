@@ -15,4 +15,6 @@ dependencies {
     testCompile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.4.1.jre8'
     compile("com.microsoft.sqlserver:mssql-jdbc:7.4.1.jre8")
     testCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
 }
