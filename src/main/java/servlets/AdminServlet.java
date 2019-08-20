@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminServlet extends HttpServlet {
     @Override
@@ -19,23 +22,17 @@ public class AdminServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        HttpSession currentSession = request.getSession();
 
         try {
             JDBC newConnection = new JDBC();
             Connection con = newConnection.connection();
-            HttpSession currentSesssion = request.getSession();
+            String query = String.format("SELECT ID FROM Employees WHERE email='%s'", email);
+            ResultSet rs = newConnection.selectStatement(con, query);
 
-            String query = String.format("SELECT email FROM Employees WHERE email='%s'", email);
+            List<String[]> allRequests = new ArrayList<String[]>();
 
-            System.out.println(newConnection.selectStatement(con,query));
-            /*if (email.equals("")){
-                request.setAttribute("error", "Incorrect name or password");
-
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("login.jsp");
-                dispatcher.forward(request, response);
-            }*/
-            if (newConnection.selectStatement(con, query) == null){
+            if (!rs.next()){
                 request.setAttribute("error", "Incorrect name or password");
 
                 RequestDispatcher dispatcher
@@ -43,8 +40,11 @@ public class AdminServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             else {
-                response.setIntHeader("EmployeeID", 1);
+                currentSession.setAttribute("EmployeeID", rs.getInt("Id"));
 
+
+
+                System.out.println(currentSession.getAttribute("EmployeeID"));
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("ViewRequests.jsp");
                 dispatcher.forward(request, response);
@@ -57,4 +57,5 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
 }

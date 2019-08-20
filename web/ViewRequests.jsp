@@ -7,15 +7,19 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<String[]> allRequests = new ArrayList<String[]>();
+    HttpSession currentSession = request.getSession();
+
+ //   List<String[]> allRequests = new ArrayList<String[]>();
 
     JDBC newConnection = new JDBC();
     Connection con = newConnection.connection();
 
 
     if (con != null) {
-        allRequests = newConnection.getRequestData(con);
+        currentSession.setAttribute("allRequests", newConnection.getRequestData(con));
     }
+
+    List<String[]> allRequests = (List<String[]>) currentSession.getAttribute("allRequests");
 %>
 
 <html>
