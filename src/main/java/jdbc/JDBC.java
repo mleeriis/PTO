@@ -33,10 +33,10 @@ public class JDBC {
         return connection;
     }
 
-    public ResultSet selectStatement(Connection con, String table) throws SQLException {
+    public ResultSet selectStatement(Connection con, String inputQ) throws SQLException {
 
         Statement stmt = null;
-        String query = "SELECT * FROM " + table + ";";
+        String query = inputQ;
         try {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
