@@ -37,11 +37,10 @@ public class JDBC {
 
         Statement stmt = null;
         String query = inputQ;
+        ResultSet rs = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            return rs;
+            rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,7 +54,7 @@ public class JDBC {
             }
 
              */
-        return null;
+        return rs;
     }
 
     public int createUpdateDeletePTO(Connection con, String preparedStatement) throws SQLException {
@@ -109,7 +108,10 @@ public class JDBC {
 
         List<String[]> allRequestsForEmployee = new ArrayList<String[]>();
         Statement stmt = null;
-        String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
+      //  String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
+
+        String query = "SELECT email, Firstname, Lastname FROM Employees WHERE email='x'";
+
         try {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);

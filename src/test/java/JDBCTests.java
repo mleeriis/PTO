@@ -23,9 +23,13 @@ public class JDBCTests {
 
     @Test
     public void selectStatementSuccessful() throws SQLException {
-   //     assertNotNull(testConnection.selectStatement(con, "SELECT * FROM Employees;"));
-  //      assertNull(testConnection.selectStatement(con, "SELECT * FROM Emp;"));
-        assertNull(testConnection.selectStatement(con, "SELECT * FROM Employees WHERE email='x'"));
+        //Test if Query is properly formmatted
+        assertNotNull(testConnection.selectStatement(con, "SELECT * FROM Employees;"));
+        assertNull(testConnection.selectStatement(con, "SELECT * FROM Emp;"));
+
+        //Test if RS is empty
+        assertTrue(testConnection.selectStatement(con, "SELECT * FROM Employees").next());
+        assertFalse(testConnection.selectStatement(con, "SELECT * FROM Employees WHERE email='x'").next());
     }
 
     @Test
