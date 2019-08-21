@@ -27,8 +27,6 @@ public class AdminServlet extends HttpServlet {
             boolean loggedIn = verifyLogin(request, currentSession);
 
             if (!loggedIn) {
-  //                request.setAttribute("error", "Incorrect name or password");
-
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
@@ -57,8 +55,8 @@ public class AdminServlet extends HttpServlet {
         String query = String.format("SELECT Id, Password FROM Employees WHERE email='%s'", email);
         ResultSet rs = newConnection.selectStatement(con, query);
 
-        if (!rs.next()) {
-            request.setAttribute("error", "Incorrect email");
+        if (!rs.next() || !(rs.getString("Password").equals(password))) {
+            request.setAttribute("error", "Incorrect email or password");
             return false;
         } else {
             List<String[]> allRequests = new ArrayList<String[]>();
