@@ -4,6 +4,7 @@
     <title>CreateRequest</title>
 </head>
 <body>
+    <a href="ViewRequests.jsp"><button>View Requests</button></a>
     <form name="createRequest" action="CreateRequestServlet" method="POST">
         <label>Start Date: <input type="date" name="startDate"></label>
         <label>End Date: <input type="date" name="endDate"></label>
