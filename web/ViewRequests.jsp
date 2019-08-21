@@ -9,7 +9,7 @@
 <%
     HttpSession currentSession = request.getSession();
 
- //   List<String[]> allRequests = new ArrayList<String[]>();
+ /*   List<String[]> allRequests = new ArrayList<String[]>();
 
     JDBC newConnection = new JDBC();
     Connection con = newConnection.connection();
@@ -18,6 +18,8 @@
     if (con != null) {
         currentSession.setAttribute("allRequests", newConnection.getRequestData(con));
     }
+
+  */
 
     List<String[]> allRequests = (List<String[]>) currentSession.getAttribute("allRequests");
 %>

@@ -27,7 +27,7 @@ public class AdminServlet extends HttpServlet {
         try {
             JDBC newConnection = new JDBC();
             Connection con = newConnection.connection();
-            String query = String.format("SELECT ID FROM Employees WHERE email='%s'", email);
+            String query = String.format("SELECT Id FROM Employees WHERE email='%s'", email);
             ResultSet rs = newConnection.selectStatement(con, query);
 
             List<String[]> allRequests = new ArrayList<String[]>();
@@ -42,9 +42,9 @@ public class AdminServlet extends HttpServlet {
             else {
                 currentSession.setAttribute("EmployeeID", rs.getInt("Id"));
 
+                currentSession.setAttribute("allRequests", newConnection.getRequestData(con));
 
 
-                System.out.println(currentSession.getAttribute("EmployeeID"));
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("ViewRequests.jsp");
                 dispatcher.forward(request, response);
