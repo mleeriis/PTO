@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: marialee
-  Date: 8/19/19
-  Time: 9:53 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>View Requests</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <form name="loginForm" action="adminServlet" method="POST">
+        <label>email*: <input type="email" id="email" name="email" required></label><br>
+        <label>Password*: <input type="password" id="password" name="password" required></label>
+        <input type="submit" value="Submit" name="login">
+    </form>
+    <h2>${error}</h2>
+</body>
 </html>

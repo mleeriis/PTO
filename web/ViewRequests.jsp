@@ -19,7 +19,7 @@
     <a href="CreateRequest.jsp">
         <button>Create Request</button>
     </a>
-    <a href="login.jsp">
+    <a href="index.jsp">
         <button>Logout</button>
     </a>
 
