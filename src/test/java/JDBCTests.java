@@ -65,6 +65,8 @@ public class JDBCTests {
 
     @Test
     public void getRequestsTest() throws SQLException {
-        assertFalse(testConnection.getRequestData(con).isEmpty());
+        String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 9;";
+
+        assertFalse(testConnection.getRequestData(con, query).isEmpty());
     }
 }

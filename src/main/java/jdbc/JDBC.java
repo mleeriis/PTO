@@ -97,7 +97,7 @@ public class JDBC {
         }
     }
 
-    public List getRequestData(Connection con) throws SQLException {
+    public List getRequestData(Connection con, String query) throws SQLException {
         /*
         HR View Query =
         SELECT CONCAT(E.Firstname, ' ', E.Lastname) AS EmployeeName, R.StartDate, R.EndDate, S.Status FROM Requests AS R
@@ -108,15 +108,16 @@ public class JDBC {
 
         List<String[]> allRequestsForEmployee = new ArrayList<String[]>();
         Statement stmt = null;
-        String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
+      //  String query = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = 1;";
 
         try {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             // String startDate, endDate, status;
-            String[] entry = new String[3];
+
 
             while (rs.next()) {
+                String[] entry = new String[3];
                 entry[0] = rs.getDate("StartDate").toString();
                 entry[1] = rs.getDate("EndDate").toString();
                 entry[2] = rs.getString("Status");
