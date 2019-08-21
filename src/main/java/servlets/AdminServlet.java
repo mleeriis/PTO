@@ -26,8 +26,6 @@ public class AdminServlet extends HttpServlet {
         try {
             verifyLogin(request, currentSession);
 
-            System.out.println(currentSession.getAttribute("loggedIn"));
-
             if ((Boolean) currentSession.getAttribute("loggedIn")) {
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("ViewRequests.jsp");
@@ -64,8 +62,6 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("error", "Incorrect email or password");
 
             session.setAttribute("loggedIn", false);
-
-      //      return false;
         } else {
             List<String[]> allRequests = new ArrayList<String[]>();
             session.setAttribute("EmployeeID", rs.getInt("Id"));
@@ -75,8 +71,6 @@ public class AdminServlet extends HttpServlet {
             session.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
 
             session.setAttribute("loggedIn", true);
-
-         //   return true;
         }
 
     }
