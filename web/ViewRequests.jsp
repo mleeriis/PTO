@@ -29,6 +29,7 @@
     <title>View Requests</title>
 </head>
 <body>
+<a href="CreateRequest.jsp"><button>Create Request</button></a>
 
 <table border="1">
     <tr>

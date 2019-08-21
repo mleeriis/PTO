@@ -4,11 +4,20 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
-        <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>servlets.AdminServlet</servlet-class>
-    </servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>servlets.AdminServlet</servlet-class>
+</servlet>
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/adminServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>servlets.CreateRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/CreateRequestServlet</url-pattern>
     </servlet-mapping>
 </web-app>
