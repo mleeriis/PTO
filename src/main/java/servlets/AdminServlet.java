@@ -24,16 +24,17 @@ public class AdminServlet extends HttpServlet {
         HttpSession currentSession = request.getSession();
 
         try {
-            boolean loggedIn = verifyLogin(request, currentSession);
+            verifyLogin(request, currentSession);
 
-            if (!loggedIn) {
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("login.jsp");
-                dispatcher.forward(request, response);
-            } else {
+            System.out.println(currentSession.getAttribute("loggedIn"));
 
+            if ((Boolean) currentSession.getAttribute("loggedIn")) {
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("ViewRequests.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -45,7 +46,11 @@ public class AdminServlet extends HttpServlet {
 
     }
 
-    private boolean verifyLogin(HttpServletRequest request, HttpSession session) throws SQLException {
+    private void verifyLogin(HttpServletRequest request, HttpSession session) throws SQLException {
+        if ("logoff".equals(request.getParameter("action"))) {
+            session.setAttribute("loggedIn", false);
+        }
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
@@ -57,7 +62,10 @@ public class AdminServlet extends HttpServlet {
 
         if (!rs.next() || !(rs.getString("Password").equals(password))) {
             request.setAttribute("error", "Incorrect email or password");
-            return false;
+
+            session.setAttribute("loggedIn", false);
+
+      //      return false;
         } else {
             List<String[]> allRequests = new ArrayList<String[]>();
             session.setAttribute("EmployeeID", rs.getInt("Id"));
@@ -65,7 +73,10 @@ public class AdminServlet extends HttpServlet {
             String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + session.getAttribute("EmployeeID") + ";";
 
             session.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
-            return true;
+
+            session.setAttribute("loggedIn", true);
+
+         //   return true;
         }
 
     }

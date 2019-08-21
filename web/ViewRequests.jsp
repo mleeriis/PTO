@@ -8,19 +8,6 @@
 
 <%
     HttpSession currentSession = request.getSession();
-
- /*   List<String[]> allRequests = new ArrayList<String[]>();
-
-    JDBC newConnection = new JDBC();
-    Connection con = newConnection.connection();
-
-
-    if (con != null) {
-        currentSession.setAttribute("allRequests", newConnection.getRequestData(con));
-    }
-
-  */
-
     List<String[]> allRequests = (List<String[]>) currentSession.getAttribute("allRequests");
 %>
 
@@ -29,28 +16,33 @@
     <title>View Requests</title>
 </head>
 <body>
-<a href="CreateRequest.jsp"><button>Create Request</button></a>
+    <a href="CreateRequest.jsp">
+        <button>Create Request</button>
+    </a>
+    <a href="login.jsp">
+        <button>Logout</button>
+    </a>
 
-<table border="1">
-    <tr>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Status</th>
-    </tr>
-    <% for (int i = 0; i < allRequests.size(); i++) {
-    %>
-    <tr>
-        <td><%=allRequests.get(i)[0]%>
-        </td>
-        <td><%=allRequests.get(i)[1]%>
-        </td>
-        <td><%=allRequests.get(i)[2]%>
-        </td>
-    </tr>
-    <%}%>
+    <table border="1">
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+        <% for (int i = 0; i < allRequests.size(); i++) {
+        %>
+        <tr>
+            <td><%=allRequests.get(i)[0]%>
+            </td>
+            <td><%=allRequests.get(i)[1]%>
+            </td>
+            <td><%=allRequests.get(i)[2]%>
+            </td>
+        </tr>
+        <%}%>
 
 
-</table>
+    </table>
 
 </body>
 </html>
