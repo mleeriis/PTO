@@ -34,6 +34,10 @@ public class CreateRequestServlet extends HttpServlet {
 
             newConnection.createUpdateDeletePTO(con,updateStatement);
 
+            String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + currentSession.getAttribute("EmployeeID") + ";";
+
+            currentSession.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
+
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("ViewRequests.jsp");
             dispatcher.forward(request, response);
