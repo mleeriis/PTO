@@ -4,6 +4,7 @@
     <title>Add Employee</title>
 </head>
 <body>
+    <a href="HRView.jsp"><button>Back to HR View</button></a>
     <form name="createEmployee" action="CreateEmployeeServlet" method="POST">
         <label>First Name: <input type="text" name="Firstname" required></label>
         <label>Last Name: <input type="text" name="Lastname" required></label>
