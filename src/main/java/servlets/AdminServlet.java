@@ -22,13 +22,18 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession currentSession = request.getSession();
-
+        String url = "";
         try {
             verifyLogin(request, currentSession);
 
             if ((Boolean) currentSession.getAttribute("loggedIn")) {
+                if ((int) currentSession.getAttribute("RoleID") == 1)
+                    url = "HRView.jsp";
+                else
+                    url = "ViewRequests.jsp";
+
                 RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("ViewRequests.jsp");
+                        = request.getRequestDispatcher(url);
                 dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher
@@ -55,7 +60,7 @@ public class AdminServlet extends HttpServlet {
         JDBC newConnection = new JDBC();
         Connection con = newConnection.connection();
 
-        String query = String.format("SELECT Id, Password FROM Employees WHERE email='%s'", email);
+        String query = String.format("SELECT Id, Password, RoleID FROM Employees WHERE email='%s'", email);
         ResultSet rs = newConnection.selectStatement(con, query);
 
         if (!rs.next() || !(rs.getString("Password").equals(password))) {
@@ -65,6 +70,8 @@ public class AdminServlet extends HttpServlet {
         } else {
             List<String[]> allRequests = new ArrayList<String[]>();
             session.setAttribute("EmployeeID", rs.getInt("Id"));
+
+            session.setAttribute("RoleID", rs.getInt("RoleID"));
 
             String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + session.getAttribute("EmployeeID") + ";";
 

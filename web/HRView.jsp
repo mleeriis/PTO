@@ -4,7 +4,8 @@
     <title>HR View</title>
 </head>
 <body>
-    <a href="CreateEmployeeServlet"><button>Add Employee</button></a>
+    <a href="AddEmployee.jsp"><button>Add Employee</button></a>
+    <a href="ViewRequests.jsp"><button>View My Requests</button></a>
 
 </body>
 </html>
