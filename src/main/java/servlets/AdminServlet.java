@@ -37,11 +37,11 @@ public class AdminServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("login.jsp");
+                        = request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 

@@ -53,7 +53,7 @@ public class CreateEmployeeServlet extends HttpServlet {
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 
