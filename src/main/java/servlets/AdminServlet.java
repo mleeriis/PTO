@@ -20,10 +20,21 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
 
-        HttpSession currentSession = request.getSession();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String url = "";
         try {
+            HttpSession currentSession = request.getSession(true);
+
             verifyLogin(request, currentSession);
 
             if ((Boolean) currentSession.getAttribute("loggedIn")) {
@@ -45,13 +56,10 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     private void verifyLogin(HttpServletRequest request, HttpSession session) throws SQLException {
         if ("logoff".equals(request.getParameter("action"))) {
             session.setAttribute("loggedIn", null);
+            return;
         }
 
         String email = request.getParameter("email");
