@@ -21,6 +21,18 @@ public class CreateRequestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("CreateRequest.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         HttpSession currentSession = request.getSession();
 
@@ -46,9 +58,4 @@ public class CreateRequestServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
 }

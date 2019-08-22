@@ -29,4 +29,13 @@
         <servlet-name>CreateEmployee</servlet-name>
         <url-pattern>/CreateEmployeeServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewRequest</servlet-name>
+        <servlet-class>servlets.ViewRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewRequest</servlet-name>
+        <url-pattern>/ViewRequestServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -16,7 +16,7 @@
     <title>View Requests</title>
 </head>
 <body>
-    <a href="CreateRequest.jsp">
+    <a href="CreateRequestServlet">
         <button>Create Request</button>
     </a>
     <a href="AdminServlet?action=logoff">

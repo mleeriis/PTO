@@ -30,14 +30,16 @@ public class AdminServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession currentSession = request.getSession(true);
         String url = "";
         try {
-            HttpSession currentSession = request.getSession(true);
-
             verifyLogin(request, currentSession);
 
-            if ((Boolean) currentSession.getAttribute("loggedIn")) {
+            if (currentSession.getAttribute("loggedIn") == null) {
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("index.jsp");
+                dispatcher.forward(request, response);
+            } else {
                 if ((int) currentSession.getAttribute("RoleID") == 1)
                     url = "HRView.jsp";
                 else
@@ -45,10 +47,6 @@ public class AdminServlet extends HttpServlet {
 
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher(url);
-                dispatcher.forward(request, response);
-            } else {
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -62,32 +60,34 @@ public class AdminServlet extends HttpServlet {
             return;
         }
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        if (session.getAttribute("loggedIn") == null) {
 
-        JDBC newConnection = new JDBC();
-        Connection con = newConnection.connection();
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
 
-        String query = String.format("SELECT Id, Password, RoleID FROM Employees WHERE email='%s'", email);
-        ResultSet rs = newConnection.selectStatement(con, query);
+            JDBC newConnection = new JDBC();
+            Connection con = newConnection.connection();
 
-        if (!rs.next() || !(rs.getString("Password").equals(password))) {
-            request.setAttribute("error", "Incorrect email or password");
+            String query = String.format("SELECT Id, Password, RoleID FROM Employees WHERE email='%s'", email);
+            ResultSet rs = newConnection.selectStatement(con, query);
 
-            session.setAttribute("loggedIn", false);
-        } else {
-            List<String[]> allRequests = new ArrayList<String[]>();
-            session.setAttribute("EmployeeID", rs.getInt("Id"));
+            if (!rs.next() || !(rs.getString("Password").equals(password))) {
+                request.setAttribute("error", "Incorrect email or password");
 
-            session.setAttribute("RoleID", rs.getInt("RoleID"));
+                session.setAttribute("loggedIn", null);
+            } else {
+                List<String[]> allRequests = new ArrayList<String[]>();
+                session.setAttribute("EmployeeID", rs.getInt("Id"));
 
-            String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + session.getAttribute("EmployeeID") + ";";
+                session.setAttribute("RoleID", rs.getInt("RoleID"));
 
-            session.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
+                String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + session.getAttribute("EmployeeID") + ";";
 
-            session.setAttribute("loggedIn", true);
+                session.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
+
+                session.setAttribute("loggedIn", true);
+            }
         }
-
     }
 
 }

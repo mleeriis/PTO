@@ -58,7 +58,9 @@ public class CreateEmployeeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("AddEmployee.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
