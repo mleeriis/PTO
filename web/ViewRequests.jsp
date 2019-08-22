@@ -19,7 +19,7 @@
     <a href="CreateRequest.jsp">
         <button>Create Request</button>
     </a>
-    <a href="index.jsp">
+    <a href="AdminServlet?action=logoff">
         <button>Logout</button>
     </a>
 

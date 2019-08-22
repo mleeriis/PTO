@@ -9,7 +9,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
-        <url-pattern>/adminServlet</url-pattern>
+        <url-pattern>/AdminServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>

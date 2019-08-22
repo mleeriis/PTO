@@ -51,7 +51,7 @@ public class AdminServlet extends HttpServlet {
 
     private void verifyLogin(HttpServletRequest request, HttpSession session) throws SQLException {
         if ("logoff".equals(request.getParameter("action"))) {
-            session.setAttribute("loggedIn", false);
+            session.setAttribute("loggedIn", null);
         }
 
         String email = request.getParameter("email");

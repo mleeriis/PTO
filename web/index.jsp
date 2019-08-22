@@ -4,7 +4,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form name="loginForm" action="adminServlet" method="POST">
+    <form name="loginForm" action="AdminServlet" method="POST">
         <label>email*: <input type="email" id="email" name="email" required></label><br>
         <label>Password*: <input type="password" id="password" name="password" required></label>
         <input type="submit" value="Submit" name="login">
