@@ -77,17 +77,40 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("loggedIn", null);
             } else {
                 List<String[]> allRequests = new ArrayList<String[]>();
+                session.setAttribute("loggedIn", true);
                 session.setAttribute("EmployeeID", rs.getInt("Id"));
-
                 session.setAttribute("RoleID", rs.getInt("RoleID"));
 
                 String selectS = "SELECT R.StartDate, R.EndDate, S.Status FROM Requests AS R LEFT JOIN Status AS S ON R.Status = S.Id WHERE EmployeeID = " + session.getAttribute("EmployeeID") + ";";
-
                 session.setAttribute("allRequests", newConnection.getRequestData(con, selectS));
 
-                session.setAttribute("loggedIn", true);
+                if ((int) session.getAttribute("RoleID") == 1) {
+                    selectS= "SELECT CONCAT(E.Firstname, ' ', E.Lastname) AS Name, R.StartDate, R.EndDate FROM Requests AS R LEFT JOIN Employees AS E ON R.EmployeeID = E.Id WHERE R.Status = 2;";
+
+                    rs = newConnection.selectStatement(con, selectS);
+
+
+                    session.setAttribute("everyRequest", processRS(rs));
+                }
             }
         }
     }
 
+    private List processRS(ResultSet rs) throws SQLException {
+        List<String[]> everyRequest = new ArrayList<String[]>();
+
+        try {
+            while (rs.next()) {
+                String[] entry = new String[3];
+                entry[0] = rs.getString("Name");
+                entry[1] = rs.getDate("StartDate").toString();
+                entry[2] = rs.getDate("EndDate").toString();
+
+                everyRequest.add(entry);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return everyRequest;
+    }
 }
